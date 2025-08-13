@@ -1,11 +1,13 @@
 @extends('layouts.info')
 
 @section('content')
-<main class="p-6 bg-white-100 flex-1 min-h-screen">
-    <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-base">
+<section class="py-10 px-6">
+    <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-lg mb-8">
              Formulir Pengajuan Sewa
-         </h1>
-    <div class="max-w-5xl mx-auto bg-white rounded shadow p-6">
+    </h1>
+
+    <div class="max-w-5xl mx-auto space-y-6">
+        
         @if ($errors->any())
             <div class="bg-red-100 text-red-700 p-4 mb-4 rounded">
                 <ul class="list-disc pl-5">

@@ -63,15 +63,21 @@
             @endif
         </div>
         <div class="flex justify-end">
-            <a href="{{ route('fasilitas', ['location' => $contents->location]) }}" class="flex items-center gap-1 bg-blue-200 hover:bg-blue-300 transition px-3 py-1.5 rounded-full shadow text-decoration-none">
-                <span class="text-primary font-semibold text-xs">Info Lebih Lanjut</span>
-                <div class="bg-white w-6 h-6 rounded-full flex items-center justify-center">
-                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 3L9 7L5 11" stroke="#0C4E98" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <a href="{{ route('fasilitas', ['location' => $contents->location]) }}" 
+            class="group flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-out">
+                
+                <span class="font-medium text-sm tracking-wide">Info Lebih Lanjut</span>
+                
+                <div class="bg-white/20 group-hover:bg-white/30 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300">
+                    <svg class="transform group-hover:translate-x-1 transition-transform duration-300" 
+                        width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M5 3L9 7L5 11" stroke="white" stroke-width="2" 
+                            stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
             </a>
         </div>
+
     </div>
 </section>
 @endsection

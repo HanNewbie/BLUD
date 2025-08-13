@@ -1,9 +1,8 @@
 @extends('layouts.info')
 
 @section('content')
-<section class="py-6 px-3">
-  <div>
-    <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-base">
+<section class="py-10 px-6">
+    <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-lg mb-8">
       OBJEK WISATA
     </h1>
     <div class="grid grid-cols-1 gap-6 mt-10 lg:grid-cols-4 lg:gap-8">
@@ -29,7 +28,6 @@
       @empty
         <p class="text-gray-500 italic">Belum ada event tersedia.</p>
       @endforelse
-    </div>
 </section>
 
 @endsection

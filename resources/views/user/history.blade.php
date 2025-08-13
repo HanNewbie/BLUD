@@ -1,8 +1,8 @@
 @extends('layouts.info')
 
 @section('content')
-<main class="p-6 bg-gray-50 flex-1">
-  <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-base">
+<section class="py-10 px-6">
+  <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-lg mb-8">
     Riwayat Pengajuan
   </h1>
 
@@ -120,14 +120,15 @@
     </div>    
   </div>
   <div class="flex justify-center mt-10">
-      <a href="{{ route('submission') }}">
-        <p class="bg-primary text-white px-6 py-2 rounded-full shadow hover:bg-blue-600 transition">
-          Buat Pengajuan Lagi
-        </p>
-      </a>
-    </div>
-</main>
-
+    <a href="{{ route('submission') }}"
+       class="group bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-out">
+        
+        <span class="font-semibold text-sm tracking-wide">
+            Buat Pengajuan Lagi
+        </span>
+    </a>
+  </div>
+</section>
 
 @if(session('success'))
 <script>

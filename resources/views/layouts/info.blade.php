@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   {{-- <link href="assets/css/output.css" rel="stylesheet" /> --}}
-  {{-- <link rel="stylesheet" href="{{ asset('assets/css/input.css') }}" /> --}}
+  <link rel="stylesheet" href="{{ asset('assets/css/input.css') }}" />
   <link rel="stylesheet" href="{{ asset('assets/css/output.css') }}" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -20,7 +20,7 @@
     
     <!-- Logo -->
     <div>
-      <img width="100" src="{{ asset('assets/svg/logo.svg') }}" alt="BLUD" />
+      <img width="100" src="{{ asset('assets/img/logo blud.png') }}" alt="BLUD" />
     </div>
 
     <!-- Hamburger & Menu -->
@@ -55,6 +55,13 @@
             <a href="{{ route('wisata') }}"
                class="mx-4 flex py-2 text-base {{ request()->routeIs('wisata') ? 'text-primary' : 'text-gray-800' }} hover:text-primary">
               Objek Wisata
+            </a>
+          </li>
+
+          <li class="group">
+            <a href="{{ route('submission') }}"
+               class="mx-4 flex py-2 text-base {{ request()->routeIs('submission') ? 'text-primary' : 'text-gray-800' }} hover:text-primary">
+               Booking 
             </a>
           </li>
 
@@ -117,6 +124,9 @@
           <li>
             <a href="{{ route('event') }}" class="block p-2 {{ request()->routeIs('event') ? 'bg-blue-200' : 'hover:bg-gray-100' }} rounded">Jadwal</a>
           </li>
+          <li>
+            <a href="{{ route('submission') }}" class="block p-2 {{ request()->routeIs('submission') ? 'bg-blue-200' : 'hover:bg-gray-100' }} rounded">Booking</a>
+          </li>
           @guest
           <li class="group">
             <a href="{{ route('login') }}"
@@ -166,7 +176,7 @@
 <footer>
     <div class="bg-slate-100 py-4 px-8 lg:flex lg:justify-around">
       <div class="flex items-center space-x-4">
-        <img src="{{ asset('assets/svg/logo.svg') }}" alt="BLUD" class="h-16 sm:h-20 object-contain">
+        <img src="{{ asset('assets/img/logo blud.png') }}" alt="BLUD" class="h-14 sm:h-20 object-contain">
         <img src="{{ asset('assets/img/telu.png') }}" alt="Telkom" class="h-14 sm:h-20 object-contain">
       </div>
       <div class="text-primary py-4 flex justify-between flex-wrap gap-4 lg:gap-10">

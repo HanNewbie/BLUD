@@ -1,10 +1,10 @@
 @extends('layouts.info')
 
 @section('content')
- <section class="py-[60px] px-6">
-    <h1 class="bg-primary mx-auto w-max text-center mb-16 mt-10 px-8 py-3 rounded-2xl uppercase text-white font-bold text-xl">
+<section class="py-10 px-6">
+    <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-lg mb-8">
         Jadwal Booking
-      </h1>
+    </h1> 
       <h2 class="text-center font-semibold text-xl">{{ ucfirst($bulan) }}</h2>
         <div class="max-w-5xl mx-auto">
             @forelse($events as $ev)

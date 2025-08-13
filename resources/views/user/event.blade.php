@@ -1,9 +1,8 @@
 @extends('layouts.info')
 
 @section('content')
-<section class="py-6 px-3">
-  <div>
-    <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-base">
+<section class="py-10 px-6">
+  <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-lg mb-8">
       Jadwal Event
     </h1>
     <div class="grid grid-cols-1 gap-6 mt-10 lg:grid-cols-4 lg:gap-8">
@@ -48,7 +47,6 @@
           <p class="bg-primary text-white px-6 py-2 rounded-full shadow hover:bg-blue-600 transition">BOOK NOW!</p>
         </a>
       </div>
-    </div>
 </section>
 
 @endsection
