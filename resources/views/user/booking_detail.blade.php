@@ -15,18 +15,18 @@
                     </div>
 
                     <h3 class="font-semibold text-lg mt-6">
-                        {{ $ev->vendor }}
+                        {{ $ev->name_event }}
                     </h3>
 
                     <p class="text-gray-700 mt-2">
-                        {{ $ev->name_event ?? 'Tidak ada deskripsi.' }}
+                        {{ $ev->vendor}}
                     </p>
 
                     {{-- Rundown jika ada --}}
                     @if($ev->file)
                         <div class="flex items-center gap-2 mt-4">
                             <img src="{{ asset('assets/svg/pdf.svg') }}" alt="PDF" class="w-6 h-6">
-                            <a href="{{ asset('storage/' . $ev->file) }}" 
+                            <a href="{{ asset('storage/' . $ev->actv_letter) }}" 
                                target="_blank" 
                                class="text-red-600 font-semibold hover:underline">
                                 Lihat Rundown

@@ -117,8 +117,6 @@
                 // Jangan jalankan apa-apa jika halaman dari cache
                 return;
             }
-
-            // Flash session (sweet alert)
             @if(session('error'))
             Swal.fire({
                 title: "Gagal!",

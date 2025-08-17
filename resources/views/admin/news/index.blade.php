@@ -140,7 +140,6 @@
                 return;
             }
 
-            // Flash session (sweet alert)
             @if(session('error'))
             Swal.fire({
                 title: "Gagal!",

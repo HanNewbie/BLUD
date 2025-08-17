@@ -84,56 +84,54 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Tombol Hapus
-        const deleteButtons = document.querySelectorAll('.delete-button');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const adminId = this.getAttribute('data-id');
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const adminId = this.getAttribute('data-id');
 
-                Swal.fire({
-                    title: "Yakin ingin dihapus?",
-                    text: "Data yang dihapus tidak dapat dikembalikan!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Ya, Hapus!",
-                    cancelButtonText: "Batal"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById(`delete-form-${adminId}`).submit();
-                    }
+                    Swal.fire({
+                        title: "Yakin ingin dihapus?",
+                        text: "Data yang dihapus tidak dapat dikembalikan!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ya, Hapus!",
+                        cancelButtonText: "Batal"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById(`delete-form-${adminId}`).submit();
+                        }
+                    });
                 });
             });
         });
-    });
 
-    // Jalankan flash hanya jika halaman bukan dari bfcache
-    window.addEventListener('pageshow', function (event) {
-        if (event.persisted || window.performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
-            // Jangan jalankan apa-apa jika halaman dari cache
-            return;
-        }
+        // Jalankan flash hanya jika halaman bukan dari bfcache
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || window.performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
+                // Jangan jalankan apa-apa jika halaman dari cache
+                return;
+            }
 
-        // Flash session (sweet alert)
-        @if(session('error'))
-        Swal.fire({
-            title: "Gagal!",
-            text: @json(session('error')),
-            icon: "error",
-            confirmButtonColor: "#d33"
+            @if(session('error'))
+            Swal.fire({
+                title: "Gagal!",
+                text: @json(session('error')),
+                icon: "error",
+                confirmButtonColor: "#d33"
+            });
+            @endif
+
+            @if(session('success'))
+            Swal.fire({
+                title: "Berhasil!",
+                text: @json(session('success')),
+                icon: "success",
+                confirmButtonColor: "#3085d6"
+            });
+            @endif
         });
-        @endif
-
-        @if(session('success'))
-        Swal.fire({
-            title: "Berhasil!",
-            text: @json(session('success')),
-            icon: "success",
-            confirmButtonColor: "#3085d6"
-        });
-        @endif
-    });
 </script>
 @endsection

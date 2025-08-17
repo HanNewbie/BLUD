@@ -38,7 +38,7 @@ class HomeController extends Controller
         }
 
         // Ambil semua event untuk lokasi tersebut
-        $events = Event::select('vendor', 'start_date', 'end_date', 'location')
+        $events = Event::select('name_event', 'start_date', 'end_date', 'location')
             ->where('location', $content->name)
             ->get()
             ->map(function ($item) {
@@ -47,7 +47,7 @@ class HomeController extends Controller
             });
 
         // Ambil submission yang disetujui dan lokasi cocok
-        $submissions = Submission::select('vendor', 'start_date', 'end_date', 'location')
+        $submissions = Submission::select('name_event', 'start_date', 'end_date', 'location')
             ->where('status', 'approved')
             ->where('location', $content->name)
             ->get()

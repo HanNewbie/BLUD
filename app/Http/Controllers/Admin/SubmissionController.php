@@ -20,7 +20,6 @@ class SubmissionController extends Controller
             $query->where('vendor', 'like', '%' . $request->search . '%');
         }
         $submissions = $query->orderBy('id', 'desc')->get();
-
         return view('admin.submission.index', compact('submissions'));
     }
 

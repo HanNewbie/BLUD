@@ -9,6 +9,7 @@ class ContentFeature  extends Model
     protected $table = 'content_features';
 
     protected $fillable = [
+        'location', // foreign key ke Content
         'type',
         'bagian', 
         'luas', 

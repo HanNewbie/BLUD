@@ -73,7 +73,6 @@ class FeatureController extends Controller
 
         $location = $validated['location'];
 
-        // ================= Penyewaan =================
         $features = $validated['features'] ?? [];
         $submittedBagian = [];
 

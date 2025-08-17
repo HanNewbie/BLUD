@@ -113,49 +113,52 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const deleteButtons = document.querySelectorAll('.delete-button');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const adminId = this.getAttribute('data-id');
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const adminId = this.getAttribute('data-id');
 
-                Swal.fire({
-                    title: "Yakin ingin dihapus?",
-                    text: "Data yang dihapus tidak dapat dikembalikan!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Ya, Hapus!",
-                    cancelButtonText: "Batal"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById(`delete-form-${adminId}`).submit();
-                    }
+                    Swal.fire({
+                        title: "Yakin ingin dihapus?",
+                        text: "Data yang dihapus tidak dapat dikembalikan!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ya, Hapus!",
+                        cancelButtonText: "Batal"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById(`delete-form-${adminId}`).submit();
+                        }
+                    });
                 });
             });
         });
-    });
-</script>
 
-@if(session('error'))
-<script>
-    Swal.fire({
-        title: "Gagal!",
-        text: "{{ session('error') }}",
-        icon: "error",
-        confirmButtonColor: "#d33"
-    });
-</script>
-@endif
-@if(session('sukses'))
-<script>
-    Swal.fire({
-        title: "Berhasil!",
-        text: "{{ session('sukses') }}",
-        icon: "sukses",
-        confirmButtonColor: "#3085d6"
-    });
-</script>
-@endif
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || window.performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
+                return;
+            }
+
+            @if(session('error'))
+            Swal.fire({
+                title: "Gagal!",
+                text: @json(session('error')),
+                icon: "error",
+                confirmButtonColor: "#d33"
+            });
+            @endif
+
+            @if(session('success'))
+            Swal.fire({
+                title: "Berhasil!",
+                text: @json(session('success')),
+                icon: "success",
+                confirmButtonColor: "#3085d6"
+            });
+            @endif
+        });
+        </script>
 @endsection

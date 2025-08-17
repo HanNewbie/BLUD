@@ -179,19 +179,6 @@
 </div>
 </div>
 <script>
-    function addFacilityInput() {
-        const container = document.getElementById('facility-list');
-        const div = document.createElement('div');
-        div.className = 'flex gap-2 mt-2';
-        div.innerHTML = `
-            <input type="text" name="facility_names[]" class="border rounded px-3 py-2 w-full" placeholder="Nama fasilitas" required>
-            <button type="button" onclick="this.parentElement.remove()" class="bg-red-500 text-white px-2 py-1 rounded">Hapus</button>
-        `;
-        container.appendChild(div);
-    }
-    
-    let priceIndex = {{ $content->features->where('type', 'price')->count() }};
-
     function addBagian() {
         const tbody = document.querySelector('#price-list tbody');
 
@@ -200,10 +187,10 @@
         tr.innerHTML = `
             <input type="hidden" name="features[${priceIndex}][type]" value="price">
             <td class="px-3 py-2">
-                <input type="text" name="features[${priceIndex}][bagian]" class="border w-full px-3 py-2 rounded" placeholder="ex: Area Parkir" required>
+                <input type="text" name="features[${priceIndex}][bagian]" class="border w-full px-3 py-2 rounded" placeholder="Depan / Belakang / Samping" required>
             </td>
             <td class="px-3 py-2">
-                <input type="text" name="features[${priceIndex}][luas]" class="border w-full px-3 py-2 rounded" placeholder="ex: 10X10" required>
+                <input type="text" name="features[${priceIndex}][luas]" class="border w-full px-3 py-2 rounded" placeholder="10x10 / 20x20" required>
             </td>
             <td class="px-3 py-2 flex items-center gap-2">
                 <input type="number" name="features[${priceIndex}][price]" class="border w-full px-3 py-2 rounded" placeholder="ex: 20000" required>
@@ -214,5 +201,17 @@
         tbody.appendChild(tr);
         priceIndex++;
     }
+    function addFacilityInput() {
+        const container = document.getElementById('facility-list');
+        const div = document.createElement('div');
+        div.className = 'flex gap-2 mt-2';
+        div.innerHTML = `
+            <input type="text" name="facility_names[]" class="border rounded px-3 py-2 w-full" placeholder="ex: Toilet Umum" required>
+            <button type="button" onclick="this.parentElement.remove()" class="bg-red-500 text-white px-2 py-1 rounded">Hapus</button>
+        `;
+        container.appendChild(div);
+    }
+    
+    let priceIndex = {{ $content->features->where('type', 'price')->count() }};
 </script>
 @endsection

@@ -20,7 +20,7 @@
                             -
                             {{ \Carbon\Carbon::parse($ev->end_date)->translatedFormat('d F Y') }}
                         </span>
-                        <span class="font-semibold text-sm">{{ $ev->vendor }}</span>
+                        <span class="font-semibold text-sm">{{ $ev->name_event}}</span>
                     </div>
                 </div>
             @endforeach
