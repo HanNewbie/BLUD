@@ -22,6 +22,8 @@ class Content extends Model
         'location',
         'location_embed',
         'image',
+        'instagram',
+        'tiktok',
     ];
 
     public function event()

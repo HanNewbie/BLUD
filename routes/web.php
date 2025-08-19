@@ -37,6 +37,7 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::middleware(['auth'])->group(function () {
     Route::get('/history', [HomeController::class, 'history'])->name('user.history');
     Route::get('/profil', [HomeController::class, 'profile'])->name('profile');
+    Route::post('/profil', [HomeController::class, 'updateProfile'])->name('profile.update');
     Route::post('/penyewaan',[HomeController::class, 'storeSubmission'])->name('user.submission.store');
 });
 

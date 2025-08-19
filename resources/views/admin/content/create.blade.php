@@ -16,6 +16,26 @@
                 <input type="text" name="name" id="name" class="border px-4 py-2 rounded-lg w-3/4" value="{{ old('name') }}" required>
             </div>
 
+            <div class="mb-4 flex items-center">
+                <label for="medsos" class="w-1/4 font-medium">Sosial Media</label>
+                <div class="flex gap-4 w-3/4">
+                    <div class="flex flex-col w-1/2">
+                        <label for="instagram" class="text-sm font-medium mb-1">Instagram</label>
+                        <input type="text" name="instagram" id="instagram" 
+                            class="border px-4 py-2 rounded-lg w-full" 
+                            value="{{ old('instagram') }}" 
+                            placeholder="https://instagram.com/username">
+                    </div>
+                    <div class="flex flex-col w-1/2">
+                        <label for="tiktok" class="text-sm font-medium mb-1">TikTok</label>
+                        <input type="text" name="tiktok" id="tiktok" 
+                            class="border px-4 py-2 rounded-lg w-full" 
+                            value="{{ old('tiktok') }}" 
+                            placeholder="https://tiktok.com/@username">
+                    </div>
+                </div>
+            </div>
+
             {{-- Deskripsi --}}
             <div class="mb-4 flex items-start">
                 <label for="description" class="w-1/4 font-medium pt-2">Deskripsi</label>

@@ -1,7 +1,9 @@
 @extends('layouts.info')
 
-@section('content')
+@section('title', 'BLUD Pariwisata')
+@section('meta_description', 'Website resmi BLUD Pariwisata Baturraden. Informasi wisata, jadwal acara, dan booking online di Banyumas.')
 
+@section('content')
 <section class="max-w-5xl mx-auto py-10 px-4">
     <h2 class="text-2xl font-bold text-center mb-1">Harga Sewa Tempat</h2>
     <p class="text-center text-gray-600 mb-6">Pricelist Sewa Area {{ $content->name }}</p>

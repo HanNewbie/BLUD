@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->text('location_embed')->nullable();
             $table->string('image')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('tiktok')->nullable(); 
             $table->timestamps();
         });
     }

@@ -1,5 +1,8 @@
 @extends('layouts.info')
 
+@section('title', 'BLUD Pariwisata')
+@section('meta_description', 'Website resmi BLUD Pariwisata Baturraden. Informasi wisata, jadwal acara, dan booking online di Banyumas.')
+
 @section('content')
 <div class="relative w-full h-[400px]">
     <img 

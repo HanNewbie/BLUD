@@ -1,5 +1,8 @@
 @extends('layouts.info')
 
+@section('title', 'BLUD Pariwisata')
+@section('meta_description', 'Website resmi BLUD Pariwisata Baturraden. Informasi wisata, jadwal acara, dan booking online di Banyumas.')
+
 @section('content')
 <section class="py-10 px-6">
     <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-lg mb-8">
@@ -24,7 +27,10 @@
             {{-- Vendor --}}
             <div class="mb-4">
                 <label for="namePIC" class="block font-medium mb-1">Nama Pengusul</label>
-                <input type="text" name="namePIC" id="namePIC" class="w-full border px-4 py-2 rounded" value="{{ old('namePIC') }}" placeholder="Masukan Nama Lengkap" required>
+                <input type="text" name="namePIC" id="namePIC"
+                    class="w-full border px-4 py-2 rounded"
+                    value="{{ old('namePIC', auth()->user()->name ?? '') }}"
+                    placeholder="Masukan Nama Lengkap" required readonly>
             </div>
 
             <div class="mb-4">
@@ -77,25 +83,69 @@
             {{-- File Upload --}}
             <div class="mb-4">
                 <label for="file" class="block font-medium mb-1">File Proposal</label>
-                <input type="file" name="file" id="file" accept=".pdf" class="w-full border px-4 py-2 rounded">
+                <input type="file" name="file" id="file" accept=".pdf"
+                    class="w-full border px-4 py-2 rounded"
+                    onchange="
+                        const errorMsg = document.getElementById('file-error');
+                        if(this.files[0].size > 5*1024*1024){
+                        errorMsg.textContent = 'File maksimal 5 MB';
+                        this.value='';
+                        } else {
+                        errorMsg.textContent = '';
+                        }
+                    ">
+                    <span id="file-error" class="text-red-500 text-sm"></span>
             </div>
 
             <div class="mb-4">
                 <label for="ktp" class="block font-medium mb-1">KTP *</label>
-                <input type="file" name="ktp" id="ktp" accept=".pdf" class="w-full border px-4 py-2 rounded" required>
+                <input type="file" name="ktp" id="ktp" accept=".pdf" class="w-full border px-4 py-2 rounded" required 
+                    onchange="
+                        const errorMsg = document.getElementById('ktp-error');
+                        if(this.files[0].size > 5*1024*1024){
+                        errorMsg.textContent = 'File maksimal 5 MB';
+                        this.value='';
+                        } else {
+                        errorMsg.textContent = '';
+                        }
+                    ">
+                    <span id="ktp-error" class="text-red-500 text-sm"></span>
             </div>
 
             <div class="mb-4">
                 <label for="appl_letter" class="block font-medium mb-1">Surat Pengajuan</label>
-                <input type="file" name="appl_letter" id="appl_letter" accept=".pdf" class="w-full border px-4 py-2 rounded">
+                <input type="file" name="appl_letter" id="appl_letter" accept=".pdf" class="w-full border px-4 py-2 rounded"
+                    onchange="
+                        const errorMsg = document.getElementById('appl-error');
+                        if(this.files[0].size > 5*1024*1024){
+                        errorMsg.textContent = 'File maksimal 5 MB';
+                        this.value='';
+                        } else {
+                        errorMsg.textContent = '';
+                        }
+                    ">
+                    <span id="appl-error" class="text-red-500 text-sm"></span>
             </div>
 
             <div class="mb-4">
                 <label for="actv_letter" class="block font-medium mb-1">Surat Kegiatan / Rundown Kegiatan</label>
-                <input type="file" name="actv_letter" id="actv_letter" accept=".pdf" class="w-full border px-4 py-2 rounded" >
+                <input type="file" name="actv_letter" id="actv_letter" accept=".pdf" class="w-full border px-4 py-2 rounded" 
+                    onchange="
+                        const errorMsg = document.getElementById('actv-error');
+                        if(this.files[0].size > 5*1024*1024){
+                        errorMsg.textContent = 'File maksimal 5 MB';
+                        this.value='';
+                        } else {
+                        errorMsg.textContent = '';
+                        }
+                    ">
+                    <span id="actv-error" class="text-red-500 text-sm"></span>
             </div>
             <p class="text-sm text-red-600 px-4 py-2 rounded-lg mt-2">
                 ⚠️ Dokumen yang diunggah harus berformat <strong>PDF</strong>.
+            </p>
+            <p class="text-sm text-red-600 px-4 py-2 rounded-lg mt-2">
+                ⚠️ Dokumen maksimal ukuran <strong>5MB</strong>.
             </p>
 
             <div class="flex justify-between mt-6">

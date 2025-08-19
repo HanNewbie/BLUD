@@ -121,6 +121,27 @@ class HomeController extends Controller
         return view('user.account.profile', compact('user'));
     }
 
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validasi input
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone'    => 'nullable|string|max:20',
+        ]);
+
+        // Update data
+        $user->update([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'phone'    => $request->phone,
+        ]);
+
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+    }
+
     public function facility($location)
     {
         // Cari lokasi berdasarkan nama
@@ -150,10 +171,10 @@ class HomeController extends Controller
         'start_date' => 'required|date',
         'end_date' => 'required|date',
         'name_event' => 'required|string|max:255',
-        'file' => 'file|mimes:pdf',
-        'ktp' => 'required|file|mimes:pdf',
-        'appl_letter' => 'file|mimes:pdf',
-        'actv_letter' => 'file|mimes:pdf',
+        'file' => 'file|mimes:pdf|max:5048',
+        'ktp' => 'required|file|mimes:pdf|max:5048',
+        'appl_letter' => 'file|mimes:pdf|max:5048',
+        'actv_letter' => 'file|mimes:pdf|max:5048',
         ]);
 
         $data['user_id'] = auth()->id();

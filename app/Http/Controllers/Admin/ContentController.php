@@ -42,6 +42,8 @@ class ContentController extends Controller
                 'location'      => 'nullable|string|max:255',
                 'location_embed'=> 'nullable|string',
                 'image'         => 'nullable|image|mimes:jpg,jpeg,png|max:5048',
+                'instagram' => 'nullable|string',
+                'tiktok' => 'nullable|string',
             ]);
 
             $existing = Content::where('name', $data['name'])->first();
@@ -92,6 +94,8 @@ class ContentController extends Controller
             'location' => 'nullable|string|max:255',
             'location_embed'=> 'nullable|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:5048',
+            'instagram' => 'nullable|string',
+            'tiktok' => 'nullable|string',
         ]);
 
         if (isset($data['name']) && $data['name'] !== $content->name) {

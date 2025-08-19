@@ -26,6 +26,29 @@
                 <input type="text" name="name" value="{{ old('name', $content->name) }}"
                     class="w-full border px-4 py-2 rounded">
             </div>
+            
+            <div class="mb-4">
+                <label class="block font-medium mb-2">Sosial Media</label>
+                <div class="flex gap-4">
+                    <!-- Kolom Instagram -->
+                    <div class="flex flex-col w-1/2">
+                        <label for="instagram" class="text-sm font-medium mb-1">Instagram</label>
+                        <input type="text" name="instagram" id="instagram"
+                            value="{{ old('instagram', $content->instagram) }}"
+                            class="w-full border px-4 py-2 rounded" 
+                            placeholder="https://instagram.com/username">
+                    </div>
+
+                    <!-- Kolom TikTok -->
+                    <div class="flex flex-col w-1/2">
+                        <label for="tiktok" class="text-sm font-medium mb-1">TikTok</label>
+                        <input type="text" name="tiktok" id="tiktok"
+                            value="{{ old('tiktok', $content->tiktok) }}"
+                            class="w-full border px-4 py-2 rounded" 
+                            placeholder="https://tiktok.com/@username">
+                    </div>
+                </div>
+            </div>
 
             <div class="mb-4">
                 <label class="block font-medium">Deskripsi</label>

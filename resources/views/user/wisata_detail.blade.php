@@ -1,5 +1,8 @@
 @extends('layouts.info')
 
+@section('title', 'BLUD Pariwisata')
+@section('meta_description', 'Website resmi BLUD Pariwisata Baturraden. Informasi wisata, jadwal acara, dan booking online di Banyumas.')
+
 @section('content')
 <section class="py-10 px-6">
     <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-lg mb-8">
@@ -16,6 +19,33 @@
             </div>
         @endif
 
+        {{-- Sosial Media --}}
+        @if($contents->instagram || $contents->tiktok)
+            <div class="bg-white border rounded-xl shadow p-6">
+                <h2 class="font-bold text-xl text-gray-800 mb-4">Sosial Media</h2>
+                <div class="flex flex-col gap-3">
+                    @if($contents->instagram)
+                        <a href="{{ $contents->instagram }}" target="_blank" 
+                        class="flex items-center gap-3 text-pink-600 hover:text-pink-700 font-medium transition-colors">
+                            {{-- Icon Instagram --}}
+                            <img src="{{ asset('assets/img/instagram.png') }}" alt="Instagram" 
+                                class="w-6 h-6 object-contain shrink-0">
+                            <span>Instagram</span>
+                        </a>
+                    @endif
+
+                    @if($contents->tiktok)
+                        <a href="{{ $contents->tiktok }}" target="_blank" 
+                        class="flex items-center gap-3 text-gray-800 hover:text-black font-medium transition-colors">
+                            {{-- Icon TikTok --}}
+                            <img src="{{ asset('assets/img/tiktok.png') }}" alt="TikTok" 
+                                class="w-6 h-6 object-contain shrink-0">
+                            <span>TikTok</span>
+                        </a>
+                    @endif
+                </div>
+            </div>
+        @endif
         {{-- Deskripsi --}}
         <div class="bg-white border rounded-xl shadow p-6">
             <h2 class="font-bold text-xl text-gray-800 mb-4">Deskripsi</h2>
@@ -25,22 +55,30 @@
         </div>
 
         {{-- Jam Operasional & Harga --}}
-        <div class="bg-white border rounded-xl shadow p-6">
-            <h2 class="font-bold text-xl text-gray-800 mb-4">Jam Operasional</h2>
-            <p class="text-gray-600 mb-2">
-                Senin - Minggu:
-                {{ $contents->open_time ? \Carbon\Carbon::parse($contents->open_time)->format('H:i') : '-' }}
-                -
-                {{ $contents->close_time ? \Carbon\Carbon::parse($contents->close_time)->format('H:i') : '-' }}
-            </p>
+        <div class="bg-white/80 backdrop-blur-sm border rounded-2xl shadow p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">
+                Jam Operasional & Harga
+            </h2>
 
-            <h2 class="font-bold text-xl text-gray-800 mt-6 mb-2">Harga Tiket</h2>
-            <p class="text-gray-600">
-                <strong>Weekday: </strong>Rp{{$contents->price_weekday ?? '-' }}
-            </p>
-            <p class="text-gray-600">
-                <strong>Weekend: </strong>Rp{{$contents->price_weekend ?? '-' }}
-            </p>
+            <div class="space-y-4">
+                {{-- Jam Operasional --}}
+                <p class="flex items-center text-gray-700 bg-yellow-50 px-4 py-2 rounded-xl">
+                    <strong class="mr-2">Jam Buka:</strong>
+                    {{ $contents->open_time ? \Carbon\Carbon::parse($contents->open_time)->format('H:i') : '-' }}
+                    -
+                    {{ $contents->close_time ? \Carbon\Carbon::parse($contents->close_time)->format('H:i') : '-' }}
+                </p>
+
+                {{-- Harga Weekday & Weekend --}}
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <p class="text-gray-700 bg-blue-50 px-4 py-2 rounded-xl">
+                        <strong>Weekday:</strong> Rp{{ $contents->price_weekday ?? '-' }}
+                    </p>
+                    <p class="text-gray-700 bg-green-50 px-4 py-2 rounded-xl">
+                        <strong>Weekend:</strong> Rp{{ $contents->price_weekend ?? '-' }}
+                    </p>
+                </div>
+            </div>
         </div>
 
         {{-- Lokasi --}}

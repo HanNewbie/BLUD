@@ -40,3 +40,5 @@ html {
 .card {
   @apply bg-white my-6 mx-auto text-gray-700 w-[350px] min-h-[10rem] shadow-lg rounded-md overflow-hidden;
 }
+
+
