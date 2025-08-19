@@ -113,7 +113,17 @@
                           </tr>
                           <tr>
                             <td class="font-semibold py-3">No. HP</td>
-                            <td class="py-3">{{ $sub->no_hp }}</td>
+                            <td class="py-3">
+                                @if($sub->no_hp)
+                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $sub->no_hp) }}" 
+                                      target="_blank" 
+                                      class="text-green-600 hover:text-green-700 font-medium">
+                                        {{ $sub->no_hp }}
+                                    </a>
+                                @else
+                                    -
+                                @endif
+                            </td>
                           </tr>
                           <tr>
                             <td class="font-semibold py-3">Vendor</td>

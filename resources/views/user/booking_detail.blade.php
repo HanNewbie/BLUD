@@ -26,10 +26,10 @@
                     </p>
 
                     {{-- Rundown jika ada --}}
-                    @if($ev->file)
+                    @if($ev->pdf_file)
                         <div class="flex items-center gap-2 mt-4">
                             <img src="{{ asset('assets/svg/pdf.svg') }}" alt="PDF" class="w-6 h-6">
-                            <a href="{{ asset('storage/' . $ev->actv_letter) }}" 
+                            <a href="{{ asset('storage/' . $ev->pdf_file) }}" 
                                target="_blank" 
                                class="text-red-600 font-semibold hover:underline">
                                 Lihat Rundown

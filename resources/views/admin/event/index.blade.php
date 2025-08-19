@@ -26,9 +26,9 @@
                 <thead>
                     <tr class="bg-blue-300 text-white">
                         <th class="p-3">No</th>
-                        <th class="p-3">Nama Penyewa/Instansi</th>
-                        <th class="p-3">Tanggal</th>
                         <th class="p-3">Nama Event</th>
+                        <th class="p-3">Tanggal</th>
+                        <th class="p-3">Nama Penyewa/Instansi</th>
                         <th class="p-3">Rundown</th>
                         <th class="p-3">Aksi</th>
                     </tr>
@@ -37,18 +37,22 @@
                     @forelse ($combined as $item)
                         <tr class="border-b">
                             <td class="p-3 text-center align-middle">{{ $loop->iteration }}</td>
-                            <td class="p-3 text-center align-middle">{{ $item->vendor }}</td>
+                            <td class="p-3 text-center align-middle">{{ $item->name_event }}</td>
                             <td class="p-3 text-center align-middle">
                                 {{ \Carbon\Carbon::parse($item->start_date ?? $item->created_at)->format('d/m/Y') }}
                                 -
                                 {{ \Carbon\Carbon::parse($item->end_date ?? $item->created_at)->format('d/m/Y') }}
                             </td>
                             <td class="p-3 text-left align-middle">
-                                {{ $item->name_event ?? '-' }}
+                                {{ $item->vendor ?? '-' }}
                             </td>
                             <td class="p-3 text-center align-middle">
-                                @if (!empty($item->file))
-                                    <a href="{{ asset('storage/' . $item->file) }}" target="_blank">
+                                @php
+                                    $pdfFile = $item->type === 'event' ? $item->file : $item->actv_letter;
+                                @endphp
+
+                                @if(!empty($pdfFile))
+                                    <a href="{{ asset('storage/' . $pdfFile) }}" target="_blank">
                                         <img src="{{ asset('assets/svg/pdf.svg') }}" alt="PDF" class="w-8 h-8 mx-auto">
                                     </a>
                                 @else
@@ -56,25 +60,30 @@
                                 @endif
                             </td>
                             <td class="p-3 text-center align-middle">
-                                @if ($item->type === 'event')
-                                    {{-- Tombol edit dan delete khusus Event --}}
-                                    <div class="flex justify-center space-x-2">
-                                        <button onclick="window.location='{{ route('event.edit', $item->id) }}'" class="flex items-center justify-center bg-green-500 hover:bg-green-600 w-9 h-9 rounded-lg">
-                                            <img src="{{ asset('assets/img/Edit.png') }}" alt="Edit" class="w-5 h-5 object-contain">
-                                        </button>
-                                        <form id="delete-form-{{ $item->id }}" method="POST" action="{{ route('event.destroy', $item->id) }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" data-id="{{ $item->id }}" class="flex items-center justify-center bg-red-500 hover:bg-red-600 w-9 h-9 rounded-lg delete-button">
-                                                <img src="{{ asset('assets/img/Trash.png') }}" alt="Delete" class="w-5 h-5 object-contain">
-                                            </button>
-                                        </form>
-                                    </div>
-                                @else
-                                    {{-- Tampilkan status submission atau info saja --}}
-                                    <span class="text-sm text-gray-600 italic">Submission (tidak bisa edit)</span>
-                                @endif
-                            </td>
+                            <div class="flex justify-center space-x-2">
+                                <!-- Tombol Edit -->
+                                <button 
+                                    onclick="window.location='{{ $item->type === 'event' ? route('event.edit', $item->id) : route('submission.edit', $item->id) }}'" 
+                                    class="flex items-center justify-center bg-green-500 hover:bg-green-600 w-9 h-9 rounded-lg">
+                                    <img src="{{ asset('assets/img/Edit.png') }}" alt="Edit" class="w-5 h-5 object-contain">
+                                </button>
+
+                                <!-- Tombol Delete -->
+                                <form 
+                                    id="delete-form-{{ $item->id }}" 
+                                    method="POST" 
+                                    action="{{ $item->type === 'event' ? route('event.destroy', $item->id) : route('submission.destroy', $item->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button 
+                                        type="button" 
+                                        data-id="{{ $item->id }}" 
+                                        class="flex items-center justify-center bg-red-500 hover:bg-red-600 w-9 h-9 rounded-lg delete-button">
+                                        <img src="{{ asset('assets/img/Trash.png') }}" alt="Delete" class="w-5 h-5 object-contain">
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
                         </tr>
                     @empty
                         <tr>
@@ -87,7 +96,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Tombol Hapus
             const deleteButtons = document.querySelectorAll('.delete-button');
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function () {
@@ -111,10 +119,8 @@
             });
         });
 
-        // Jalankan flash hanya jika halaman bukan dari bfcache
         window.addEventListener('pageshow', function (event) {
             if (event.persisted || window.performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
-                // Jangan jalankan apa-apa jika halaman dari cache
                 return;
             }
             @if(session('error'))

@@ -80,16 +80,25 @@ class HomeController extends Controller
             ->where('location', $content->name)
             ->whereMonth('start_date', $monthNumber)
             ->orderBy('start_date')
-            ->get();
+            ->get()
+            ->map(function($event) {
+                $event->pdf_file = $event->file; // samakan nama property
+                $event->type = 'event';
+                return $event;
+            });
 
         $submissions = Submission::where('status', 'approved')
             ->where('location', $content->name)
             ->whereMonth('start_date', $monthNumber)
             ->orderBy('start_date')
-            ->get();
+            ->get()
+            ->map(function($submission) {
+                $submission->pdf_file = $submission->actv_letter; // samakan nama property
+                $submission->type = 'submission';
+                return $submission;
+            });
 
-        $merged = collect($events)->merge($submissions)->sortBy('start_date')->values();
-
+        $merged = $events->merge($submissions)->sortBy('start_date')->values();
         return view('user.booking_detail', [
             'events' => $merged,
             'slug' => $slug,

@@ -36,11 +36,11 @@
 
                     @if($contents->tiktok)
                         <a href="{{ $contents->tiktok }}" target="_blank" 
-                        class="flex items-center gap-3 text-gray-800 hover:text-black font-medium transition-colors">
+                        class="flex items-center gap-3 text-green-800 hover:text-green font-medium transition-colors">
                             {{-- Icon TikTok --}}
-                            <img src="{{ asset('assets/img/tiktok.png') }}" alt="TikTok" 
+                            <img src="{{ asset('assets/img/whatsapp.png') }}" alt="TikTok" 
                                 class="w-6 h-6 object-contain shrink-0">
-                            <span>TikTok</span>
+                            <span>WhatsApp</span>
                         </a>
                     @endif
                 </div>

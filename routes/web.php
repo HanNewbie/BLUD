@@ -59,6 +59,9 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/content/{id}/facilities', [FeatureController::class, 'index'])->name('content.facilities');
 
     Route::get('submission', [SubmissionController::class, 'index'])->name('submission.index');
+    Route::get('submission/{id}/edit', [SubmissionController::class, 'edit'])->name('submission.edit');
+    Route::put('submission/{id}', [SubmissionController::class, 'update'])->name('submission.update');
+    Route::delete('submission/{id}', [SubmissionController::class, 'destroy'])->name('submission.destroy');
     Route::get('submission/approved', [SubmissionController::class, 'approved'])->name('submission.approved.list');
     Route::get('submission/rejected', [SubmissionController::class, 'rejected'])->name('submission.rejected.list');
     // PUT untuk menyetujui/menolak 
