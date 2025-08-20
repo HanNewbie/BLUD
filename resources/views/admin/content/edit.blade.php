@@ -41,11 +41,11 @@
 
                     <!-- Kolom TikTok -->
                     <div class="flex flex-col w-1/2">
-                        <label for="tiktok" class="text-sm font-medium mb-1">TikTok</label>
-                        <input type="text" name="tiktok" id="tiktok"
-                            value="{{ old('tiktok', $content->tiktok) }}"
+                        <label for="whatsapp" class="text-sm font-medium mb-1">WhatsApp</label>
+                        <input type="text" name="whatsapp" id="whatsapp"
+                            value="{{ old('whatsapp', $content->whatsapp) }}"
                             class="w-full border px-4 py-2 rounded" 
-                            placeholder="https://tiktok.com/@username">
+                            placeholder="https://wa.me/6281234567890">
                     </div>
                 </div>
             </div>

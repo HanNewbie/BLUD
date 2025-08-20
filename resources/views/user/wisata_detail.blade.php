@@ -34,11 +34,10 @@
                         </a>
                     @endif
 
-                    @if($contents->tiktok)
-                        <a href="{{ $contents->tiktok }}" target="_blank" 
+                    @if($contents->whatsapp)
+                        <a href="{{ $contents->whatsapp }}" target="_blank" 
                         class="flex items-center gap-3 text-green-800 hover:text-green font-medium transition-colors">
-                            {{-- Icon TikTok --}}
-                            <img src="{{ asset('assets/img/whatsapp.png') }}" alt="TikTok" 
+                            <img src="{{ asset('assets/img/whatsapp.png') }}" alt="whatsapp" 
                                 class="w-6 h-6 object-contain shrink-0">
                             <span>WhatsApp</span>
                         </a>

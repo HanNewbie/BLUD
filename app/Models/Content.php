@@ -23,7 +23,7 @@ class Content extends Model
         'location_embed',
         'image',
         'instagram',
-        'tiktok',
+        'whatsapp',
     ];
 
     public function event()
