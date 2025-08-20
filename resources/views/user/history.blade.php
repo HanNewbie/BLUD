@@ -87,14 +87,17 @@
 
         {{-- Dokumen --}}
         <div class="mb-3 space-y-1">
-          @if($sub->appl_letter)
-          <a href="{{ asset('storage/' . $sub->appl_letter) }}" class="text-blue-600 text-sm underline block">📄 Surat Pengajuan</a>
+          @if($sub->file)
+          <a href="{{ asset('storage/' . $sub->file) }}" class="text-blue-600 text-sm underline block">📄 File Proposal</a>
           @endif
-          @if($sub->actv_letter)
-          <a href="{{ asset('storage/' . $sub->actv_letter) }}" class="text-blue-600 text-sm underline block">📑 Proposal</a>
+          @if($sub->appl_letter)
+          <a href="{{ asset('storage/' . $sub->appl_letter) }}" class="text-blue-600 text-sm underline block">📄 File Pengajuan</a>
           @endif
           @if($sub->ktp)
           <a href="{{ asset('storage/' . $sub->ktp) }}" class="text-blue-600 text-sm underline block">🆔 KTP</a>
+          @endif
+           @if($sub->actv_letter)
+          <a href="{{ asset('storage/' . $sub->actv_letter) }}" class="text-blue-600 text-sm underline block">📑 File Kegiatan / Rundown</a>
           @endif
         </div>
 

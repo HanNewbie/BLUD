@@ -4,7 +4,8 @@
 @section('meta_description', 'Website resmi BLUD Pariwisata Baturraden. Informasi wisata, jadwal acara, dan booking online di Banyumas.')
 
 @section('content')
-<div class="relative w-full h-[400px]">
+
+<div class="relative w-full h-[400px] ">
     <img 
         src="{{ asset('assets/img/bg-hero.png') }}" 
         alt="hero" 

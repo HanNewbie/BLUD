@@ -13,7 +13,7 @@
             @forelse($events as $ev)
                 <div class="mt-12 border rounded-lg p-6 relative">
                     <div class="absolute left-[-1px] top-[-30px] font-bold text-sm bg-primary w-max py-4 px-8 text-white rounded-lg">
-                        {{ \Carbon\Carbon::parse($ev->start_date)->translatedFormat('d') }} -
+                        {{ \Carbon\Carbon::parse($ev->start_date)->translatedFormat('d F') }} -
                         {{ \Carbon\Carbon::parse($ev->end_date)->translatedFormat('d F Y') }}
                     </div>
 

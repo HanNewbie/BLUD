@@ -69,17 +69,23 @@ class LoginController extends Controller
 
    public function store(Request $request)
     {
-        // Validasi data
         $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:15',
+            'name' => 'required|string|min:3|max:255',
+            'phone' => [
+                'nullable',
+                'string',
+                'max:15',
+                'regex:/^(08|628)[0-9]{7,12}$/',
+            ],
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:6',
+        ], [
+            'name.min' => 'Nama minimal harus 3 huruf.',
+            'phone.regex' => 'Nomor HP harus diawali dengan 08 atau 628.',
         ]);
 
         $username = strtolower(str_replace(' ', '', $request->name));
 
-        // Pastikan username unik
         $originalUsername = $username;
         $counter = 1;
         while (\App\Models\User::where('username', $username)->exists()) {
@@ -87,10 +93,9 @@ class LoginController extends Controller
             $counter++;
         }
 
-        // Simpan user baru
         User::create([
             'name' => $request->name,
-            'username' => $username, // otomatis dari name
+            'username' => $username,
             'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -98,5 +103,4 @@ class LoginController extends Controller
 
         return redirect()->route('login')->with('success', 'Pendaftaran berhasil. Silahkan login.');
     }
-
 }

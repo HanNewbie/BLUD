@@ -48,34 +48,46 @@
         <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6">
             <h3 class="text-xl font-bold mb-4">Edit Profil</h3>
 
-            <form action="{{ route('profile.update') }}" method="POST" class="space-y-4">
-                @csrf
+<form action="{{ route('profile.update') }}" method="POST" class="space-y-4" onsubmit="return validateForm()">
+    @csrf
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                    <input type="text" name="name" value="{{ old('name', Auth::user()->name) }}"
-                           class="w-full border px-4 py-2 rounded">
-                </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+        <input type="text" name="name" value="{{ old('name', Auth::user()->name) }}"
+               class="w-full border px-4 py-2 rounded">
+        <p id="error-name" class="text-sm text-red-600 mt-1"></p>
+    </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" value="{{ old('email', Auth::user()->email) }}"
-                           class="w-full border px-4 py-2 rounded">
-                </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" name="email" value="{{ old('email', Auth::user()->email) }}"
+               class="w-full border px-4 py-2 rounded">
+        <p id="error-email" class="text-sm text-red-600 mt-1"></p>
+    </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Nomor HP</label>
-                    <input type="text" name="phone" value="{{ old('phone', Auth::user()->phone) }}"
-                           class="w-full border px-4 py-2 rounded">
-                </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Nomor HP</label>
+        <input type="text" name="phone" value="{{ old('phone', Auth::user()->phone) }}"
+               class="w-full border px-4 py-2 rounded">
+        <p id="error-phone" class="text-sm text-red-600 mt-1"></p>
+    </div>
 
-                <div class="flex justify-end space-x-2 pt-4">
-                    <button type="button" @click="open = false"
-                            class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Batal</button>
-                    <button type="submit"
-                            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Simpan</button>
-                </div>
-            </form>
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Ganti Password (opsional)</label>
+        <input type="password" name="password" placeholder="Masukkan password baru"
+               class="w-full border px-4 py-2 rounded">
+        <p class="text-sm text-gray-500">Biarkan kosong jika tidak ingin mengubah password.</p>
+        <p id="error-password" class="text-sm text-red-600 mt-1"></p>
+    </div>
+
+    <div class="flex justify-end space-x-2 pt-4">
+        <button type="button" @click="open = false"
+                class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Batal</button>
+        <button type="submit"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Simpan</button>
+    </div>
+</form>
+
         </div>
     </div>
 </div>
@@ -105,6 +117,50 @@
             });
             @endif
         });
+
+function validateForm() {
+    // reset error
+    document.getElementById("error-name").textContent = "";
+    document.getElementById("error-email").textContent = "";
+    document.getElementById("error-phone").textContent = "";
+    document.getElementById("error-password").textContent = "";
+
+    const name = document.querySelector('input[name="name"]').value.trim();
+    const email = document.querySelector('input[name="email"]').value.trim();
+    const phone = document.querySelector('input[name="phone"]').value.trim();
+    const password = document.querySelector('input[name="password"]').value;
+
+    let valid = true;
+
+    // Validasi Nama
+    if (name.length < 3) {
+        document.getElementById("error-name").textContent = "Nama minimal 3 karakter.";
+        valid = false;
+    }
+
+    // Validasi Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        document.getElementById("error-email").textContent = "Format email tidak valid.";
+        valid = false;
+    }
+
+    // Validasi Nomor HP (opsional, jika diisi)
+    const phoneRegex = /^(08|628)[0-9]{8,18}$/;
+    if (phone && !phoneRegex.test(phone)) {
+        document.getElementById("error-phone").textContent = "Nomor HP harus diawali 08 atau 628 dan minimal 10 digit.";
+        valid = false;
+    }
+
+    // Validasi Password (opsional)
+    if (password && password.length < 8) {
+        document.getElementById("error-password").textContent = "Password minimal 8 karakter.";
+        valid = false;
+    }
+
+    return valid;
+}
+
 </script>
 
 <script src="https://unpkg.com/alpinejs" defer></script>

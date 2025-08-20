@@ -19,7 +19,6 @@
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/svg/logo.svg') }}">
 
   {{-- Default Meta --}}
-  <meta name="description" content="Website BLUD">
   <meta name="keywords" content="BLUD, Pariwisata, Baturraden, Banyumas">
   <meta name="author" content="BLUD Team">
   <link rel="canonical" href="{{ url()->current() }}">
@@ -140,34 +139,70 @@
             @endauth
           </ul>
         </div>
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden"></div>
 
         {{-- Sidebar (Mobile) --}}
-        <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300">
+        <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+          {{-- Header Sidebar --}}
           <div class="p-4 border-b flex justify-between items-center">
-            <span class="text-lg font-bold">Menu</span>
-            <button id="closeBtn" class="text-gray-700 text-xl">&times;</button>
+            <span class="text-lg font-bold text-blue-500">Menu</span>
+            <button id="closeBtn" class="text-gray-700 text-2xl hover:text-red-500 transition">&times;</button>
           </div>
+
+          {{-- Menu List --}}
           <ul class="p-4 space-y-2">
-            <li><a href="{{ route('home') }}" class="block p-2 {{ request()->routeIs('home') ? 'bg-blue-200' : 'hover:bg-gray-100' }} rounded">Home</a></li>
-            <li><a href="{{ route('wisata') }}" class="block p-2 {{ request()->routeIs('wisata') ? 'bg-blue-200' : 'hover:bg-gray-100' }} rounded">Objek Wisata</a></li>
-            <li><a href="{{ route('event') }}" class="block p-2 {{ request()->routeIs('event') ? 'bg-blue-200' : 'hover:bg-gray-100' }} rounded">Jadwal</a></li>
-            <li><a href="{{ route('submission') }}" class="block p-2 {{ request()->routeIs('submission') ? 'bg-blue-200' : 'hover:bg-gray-100' }} rounded">Booking</a></li>
-            
+            <li>
+              <a href="{{ route('home') }}" 
+                class="block p-2 rounded {{ request()->routeIs('home') ? 'bg-blue-100 text-blue-600 font-semibold' : 'hover:bg-gray-100' }}">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('wisata') }}" 
+                class="block p-2 rounded {{ request()->routeIs('wisata') ? 'bg-blue-100 text-blue-600 font-semibold' : 'hover:bg-gray-100' }}">
+                Objek Wisata
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('event') }}" 
+                class="block p-2 rounded {{ request()->routeIs('event') ? 'bg-blue-100 text-blue-600 font-semibold' : 'hover:bg-gray-100' }}">
+                Jadwal
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('submission') }}" 
+                class="block p-2 rounded {{ request()->routeIs('submission') ? 'bg-blue-100 text-blue-600 font-semibold' : 'hover:bg-gray-100' }}">
+                Booking
+              </a>
+            </li>
             @guest
               <li>
-                <a href="{{ route('login') }}" class="mx-4 flex items-center justify-center py-2 px-4 text-base font-bold text-blue-400 border border-blue-400 rounded-md hover:bg-blue-400 hover:text-white transition">
-                  Masuk/Daftar
+                <a href="{{ route('login') }}" 
+                  class="block text-center py-2 px-4 text-base font-bold text-blue-500 border border-blue-500 rounded-md hover:bg-blue-500 hover:text-white transition">
+                  Masuk / Daftar
                 </a>
               </li>
             @endguest
-
             @auth
-              <li><a href="{{ route('user.history') }}" class="block p-2 {{ request()->routeIs('user.history') ? 'bg-blue-200' : 'hover:bg-gray-100' }} rounded">Riwayat Pengajuan</a></li>
-              <li><a href="{{ route('profile') }}" class="block p-2 {{ request()->routeIs('profile') ? 'bg-blue-200' : 'hover:bg-gray-100' }} rounded">Profile</a></li>
+              <li>
+                <a href="{{ route('user.history') }}" 
+                  class="block p-2 rounded {{ request()->routeIs('user.history') ? 'bg-blue-100 text-blue-600 font-semibold' : 'hover:bg-gray-100' }}">
+                  Riwayat Pengajuan
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('profile') }}" 
+                  class="block p-2 rounded {{ request()->routeIs('profile') ? 'bg-blue-100 text-blue-600 font-semibold' : 'hover:bg-gray-100' }}">
+                  Profile
+                </a>
+              </li>
               <li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                   @csrf
-                  <button type="button" id="btn-logout" class="block p-2 text-red-600 hover:bg-gray-100">Logout</button>
+                  <button type="submit" 
+                          class="w-full text-left p-2 text-red-600 hover:bg-gray-100 rounded">
+                    Logout
+                  </button>
                 </form>
               </li>
             @endauth
@@ -270,6 +305,26 @@
         });
       }
     });
+
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const closeBtn = document.getElementById("closeBtn");
+  const hamburger = document.getElementById("hamburger");
+
+  function openSidebar() {
+    sidebar.classList.remove("-translate-x-full");
+    overlay.classList.remove("hidden");
+  }
+
+  function closeSidebar() {
+    sidebar.classList.add("-translate-x-full");
+    overlay.classList.add("hidden");
+  }
+
+  hamburger?.addEventListener("click", openSidebar);
+  closeBtn?.addEventListener("click", closeSidebar);
+  overlay?.addEventListener("click", closeSidebar);
+
   </script>
 </body>
 </html>

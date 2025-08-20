@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Content;
 use App\Models\News;
 use App\Models\Event;
@@ -72,7 +73,25 @@ class HomeController extends Controller
 
     public function bookingDetail($slug, $bulan)
     {
-        $monthNumber = \Carbon\Carbon::parse("1 $bulan")->month;
+        $bulanMap = [
+            'januari' => 'january',
+            'februari' => 'february',
+            'maret' => 'march',
+            'april' => 'april',
+            'mei' => 'may',
+            'juni' => 'june',
+            'juli' => 'july',
+            'agustus' => 'august',
+            'september' => 'september',
+            'oktober' => 'october',
+            'november' => 'november',
+            'desember' => 'december',
+        ];
+
+        // ubah bulan indo ke english kalau ada
+        $bulanEn = $bulanMap[strtolower($bulan)] ?? $bulan;
+
+        $monthNumber = \Carbon\Carbon::parse("1 $bulanEn")->month;
 
         $content = Content::where('slug', $slug)->firstOrFail();
 
@@ -82,7 +101,7 @@ class HomeController extends Controller
             ->orderBy('start_date')
             ->get()
             ->map(function($event) {
-                $event->pdf_file = $event->file; // samakan nama property
+                $event->pdf_file = $event->file;
                 $event->type = 'event';
                 return $event;
             });
@@ -93,18 +112,20 @@ class HomeController extends Controller
             ->orderBy('start_date')
             ->get()
             ->map(function($submission) {
-                $submission->pdf_file = $submission->actv_letter; // samakan nama property
+                $submission->pdf_file = $submission->actv_letter;
                 $submission->type = 'submission';
                 return $submission;
             });
 
         $merged = $events->merge($submissions)->sortBy('start_date')->values();
+
         return view('user.booking_detail', [
             'events' => $merged,
             'slug' => $slug,
             'bulan' => $bulan,
         ]);
     }
+
 
     public function content(){
 
@@ -134,18 +155,23 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        // Validasi input
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|max:255|unique:users,email,' . $user->id,
             'phone'    => 'nullable|string|max:20',
+            'password' => 'nullable|min:8',
         ]);
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        } else {
+            $data['password'] = $user->password;
+        }
 
-        // Update data
         $user->update([
             'name'     => $request->name,
             'email'    => $request->email,
             'phone'    => $request->phone,
+            'password' => $data['password'] ?? $user->password,
         ]);
 
         return redirect()->back()->with('success', 'Profil berhasil diperbarui.');

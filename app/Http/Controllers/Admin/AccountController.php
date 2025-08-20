@@ -72,7 +72,7 @@ class AccountController extends Controller
 
         $data = $request->validate([
             'username' => 'required|unique:admins,username,' . $id,
-            'password' => 'nullable|min:6',
+            'password' => 'nullable|min:8',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:15',

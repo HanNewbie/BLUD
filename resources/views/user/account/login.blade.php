@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Masuk - BLUD Pariwisata</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="icon" type="image/x-icon" href="{{ asset('assets/svg/logo.svg') }}">
+
 </head>
 <body class="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center px-4" style="background-image: url('{{ asset('assets/img/menara.jpg') }}');">
 
@@ -62,14 +65,13 @@
 
 </body>
 </html>
-
-@if(session('error'))
+@if(session('success') || session('error'))
 <script>
     Swal.fire({
-        title: "Gagal!",
-        text: "{{ session('error') }}",
-        icon: "error",
-        confirmButtonColor: "#d33"
+        title: "{{ session('success') ? 'Berhasil!' : 'Gagal!' }}",
+        text: "{{ session('success') ?? session('error') }}",
+        icon: "{{ session('success') ? 'success' : 'error' }}",
+        confirmButtonColor: "{{ session('success') ? '#3085d6' : '#d33' }}"
     });
 </script>
 @endif
