@@ -40,7 +40,7 @@
 
     {{-- Nomor HP --}}
     <div>
-        <label class="block text-sm text-gray-600 mb-1" for="phone">Nomor HP</label>
+        <label class="block text-sm text-gray-600 mb-1" for="phone">Nomor HP (WhatsApp)</label>
         <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
             class="w-full px-4 py-2 rounded-lg border 
             @error('phone') border-red-500 @else border-gray-300 @enderror 
@@ -78,6 +78,10 @@
         <input type="password" id="password_confirmation" name="password_confirmation" required
             class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none">
     </div>
+
+    <p class="text-sm text-red-600 px-1 py-1 rounded-lg mt-2">
+      ⚠️ Pastikan <strong>Email</strong> dan <strong>Nomor Handphone</strong> aktif karena akan digunakan untuk informasi lebih lanjut.
+    </p>
 
     <button type="submit"
         class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
