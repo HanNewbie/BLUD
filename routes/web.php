@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\SitemapController;
 
 // User routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -21,7 +22,7 @@ Route::get('/booking/{slug}', [HomeController::class, 'booking'])->name('booking
 Route::get('/booking/{slug}/{bulan}', [HomeController::class, 'bookingDetail'])->name('booking.detail');
 Route::get('/wisata',[HomeController::class, 'content'])->name('wisata');
 Route::get('/wisata/{slug}',[HomeController::class, 'contentDetail'])->name('wisata.detail');
-Route::get('/fasilitas/{location}',[HomeController::class, 'facility'])->name('fasilitas');
+Route::get('/fasilitas/{slug}',[HomeController::class, 'facility'])->name('fasilitas');
 Route::get('/penyewaan',[HomeController::class, 'createSubmission'])->name('submission');
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
@@ -69,3 +70,13 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::put('submission/{id}/reject', [SubmissionController::class, 'reject'])->name('submission.rejected');
 });
 
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
+
+
+Route::get('/cek-session', function () {
+    return [
+        'session_id' => session()->getId(),
+        'auth' => Auth::check(),
+        'user' => Auth::user(),
+    ];
+});

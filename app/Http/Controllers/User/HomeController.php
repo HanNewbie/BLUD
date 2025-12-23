@@ -177,15 +177,15 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
     }
 
-    public function facility($location)
+    public function facility($slug)
     {
-        // Cari lokasi berdasarkan nama
-        $content = Content::where('location', $location)->firstOrFail();
-
+        // Cari content berdasarkan slug, bukan location
+        $content = Content::where('slug', $slug)->firstOrFail();
+    
         // Ambil fasilitas berdasarkan ID content
         $facilities = ContentFeature::where('location', $content->id)->get();
-        // dd($facilities);
-        return view('user.facility', compact('facilities', 'location','content'));
+    
+        return view('user.facility', compact('facilities', 'content'));
     }
 
     public function createSubmission()

@@ -115,8 +115,7 @@
         });
       }
 
-  // Tutup dropdown jika klik di luar
-        document.addEventListener('click', function (e) {
+      document.addEventListener('click', function (e) {
           const isInside = dropdowns.some(name => {
             return e.target.closest(`#dropdown-${name}`) || e.target.closest(`button[onclick*="${name}"]`);
           });
@@ -147,5 +146,4 @@
           });
         });
       </script>
-
 </html>

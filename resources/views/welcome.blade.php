@@ -5,21 +5,22 @@
 
 @section('content')
 
-<div class="relative w-full h-[400px] ">
-    <img 
-        src="{{ asset('assets/img/bg-hero.png') }}" 
-        alt="hero" 
-        class="w-full h-full object-cover brightness-75" 
-    />
-    <div class="absolute inset-0 flex items-center justify-center">
-        <h1 class="text-white text-center text-xl md:text-3xl font-bold px-4">
-            Selamat Datang,<br />
-            <span class="font-extrabold">
-                Bersama BLUD Pariwisata, Eksplorasi Banyumas Lebih Dekat!
-            </span>
-        </h1>
-    </div>
+<div class="relative w-full h-[220px] md:h-[400px]">
+  <img 
+    src="{{ asset('assets/img/bg-hero.png') }}" 
+    alt="hero" 
+    class="w-full h-full object-cover brightness-75" 
+  />
+  <div class="absolute inset-0 flex items-center justify-center">
+    <h1 class="text-white text-center text-lg md:text-3xl font-bold px-4 leading-snug">
+      Selamat Datang,<br />
+      <span class="font-extrabold">
+        Bersama BLUD Pariwisata, Eksplorasi Banyumas Lebih Dekat!
+      </span>
+    </h1>
+  </div>
 </div>
+
 
 <div class="bg-white rounded-xl p-6 shadow text-justify text-sm md:w-[80%] md:mx-auto">
     <p class="mb-4">
@@ -65,7 +66,7 @@
 
 <section class="py-6 px-4 sm:px-6 lg:px-8">
   <div>
-    <h1 class="bg-primary mx-auto w-max text-center px-8 py-2 rounded-2xl uppercase text-white font-bold text-base">
+    <h1 class="mx-auto w-max px-8 py-2 rounded-2xl uppercase bg-blue-700 text-white font-bold text-base text-center shadow-md">
       Kabar Banyumas
     </h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
@@ -96,6 +97,4 @@
     </div>
   </div>
 </section>
-
-
 @endsection

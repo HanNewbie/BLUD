@@ -222,7 +222,7 @@
     <div class="bg-slate-100 py-4 px-8 lg:flex lg:justify-around">
       <div class="flex items-center space-x-4">
         <img src="{{ asset('assets/img/logo blud.png') }}" alt="BLUD" class="h-14 sm:h-20 object-contain">
-        <img src="{{ asset('assets/img/telu.png') }}" alt="Telkom" class="h-14 sm:h-20 object-contain">
+       <img src="{{ asset('assets/img/telu.png') }}" alt="Telkom" class="h-12 sm:h-16 object-contain">
       </div>
       <div class="text-primary py-4 flex justify-between flex-wrap gap-4 lg:gap-10">
         <div class="flex flex-col gap-2">

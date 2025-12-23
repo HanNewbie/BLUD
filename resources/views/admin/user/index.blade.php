@@ -80,14 +80,12 @@
             </table>
         </div>
 
-        <!-- Modal Edit User -->
         <div x-show="showModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" style="display: none;">
             <div @click.away="showModal = false" class="bg-white p-6 rounded-lg w-full max-w-md">
                 <h2 class="text-xl font-semibold mb-4">Edit Data Pengguna</h2>
                 <form :action="'{{ url('admin/user') }}/' + user.id" method="POST">
                     @csrf
                     @method('PUT')
-
                     <div class="mb-4">
                         <label class="block text-sm font-semibold">Nama User</label>
                         <input type="text" name="name" x-model="user.name" class="w-full border p-2 rounded" required>
