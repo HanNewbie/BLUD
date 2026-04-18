@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('location_embed')->nullable();
             $table->string('image')->nullable();
             $table->string('instagram')->nullable();
-            $table->string('tiktok')->nullable(); 
+            $table->string('whatsapp')->nullable(); 
             $table->timestamps();
         });
     }
